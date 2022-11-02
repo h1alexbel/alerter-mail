@@ -55,12 +55,12 @@ public class MailBot implements TelegramMvcController {
         return this.prepareAndSend(chat, message, bot);
       } else {
         return new SendMessage(chat.id(),
-            "I can't release it. I need an artifact in PDF format to make a release."
+            "I can't release it. I need an artifact in PDF format to make a release." + "\n" + " If I'm not responding trigger me please: link \uD83D\uDD14"
         );
       }
     } else {
       return new SendMessage(chat.id(),
-          "I see you're talking about me, but I don't understand it. If you want to say something to me directly, message format should be: @alerter release it to example@gmail.com; subject is X");
+          "I see you're talking about me, but I don't understand it. If you want to say something to me directly, message format should be: @alerter release it to example@gmail.com; subject is X" + "\n" + "If I'm not responding trigger me please: link \uD83D\uDD14");
     }
   }
 
@@ -77,7 +77,7 @@ public class MailBot implements TelegramMvcController {
     final PreparedMail prepared = this.service.prepare(request);
     this.service.send(prepared);
     return new SendMessage(chat.id(),
-        "Artifact successfully published" + '\n' + "to: " + request.getTo() + "\uD83D\uDC4D");
+        "Artifact successfully published" + '\n' + "to: " + request.getTo() + "\uD83D\uDC4D" + "\n" + "If I'm not responding trigger me please: link \uD83D\uDD14");
   }
 
   private String takeDocumentUrl(final Message message, final TelegramBot bot) {
