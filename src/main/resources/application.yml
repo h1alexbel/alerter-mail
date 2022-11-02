@@ -1,6 +1,0 @@
-spring:
-  application:
-    name: alerter-mail
-server:
-  shutdown: graceful
-  port: ${PORT}
