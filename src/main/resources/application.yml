@@ -1,18 +1,5 @@
 spring:
   application:
     name: alerter-mail
-#  mail:
-#    host: smtp.gmail.com
-#    port: 587
-#    username: abialiauski.alerter@gmail.com
-#    password: jypsojwddawmkcfq
-#    properties:
-#      mail:
-#        smtp:
-#          auth: true
-#          starttls:
-#            enable: true
 server:
   shutdown: graceful
-#bot:
-#  token: 5620261428:AAFH1aLBTxgTOawMd_wHm7JlZXBYdQTtkWc
