@@ -2,5 +2,5 @@ spring:
   application:
     name: alerter-mail
 server:
-  port: ${PORT}
+  port: ${PORT:8080}
   shutdown: graceful
