@@ -56,7 +56,7 @@
                     <assembleDirectory>target</assembleDirectory>
                     <programs>
                         <program>
-                            <mainClass>AlerterMailApplication</mainClass>
+                            <mainClass>com.alerter.mail.AlerterMailApplication</mainClass>
                             <name>worker</name>
                         </program>
                     </programs>
