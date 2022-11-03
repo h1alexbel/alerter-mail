@@ -1,6 +1,5 @@
 package com.alerter.mail;
 
-import com.alerter.mail.trigger.TrResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -28,6 +27,6 @@ public class AlerterMailApplication {
 
   @Scheduled(fixedDelay = 10000L)
   private void ping() {
-    this.rest.getForEntity("https://tg-alerter.herokuapp.com/api/v1/trigger", TrResponse.class);
+    this.rest.getForEntity("https://tg-alerter.herokuapp.com/api/v1/trigger", Object.class);
   }
 }
