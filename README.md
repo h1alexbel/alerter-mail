@@ -6,7 +6,7 @@
 
 ## What Problems Does Alerter Solve?
 
-Automated PDF artifacts delivering. Alerter attempts to reduce an effort that you do to email and attach and PDF document.
+Automated PDF artifacts delivering. Alerter attempts to reduce an effort that you do to email and attach PDF document.
 
 ## How It Works?
 ![msg](msg.png)
