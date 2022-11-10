@@ -39,7 +39,7 @@ public class MailBot implements TelegramMvcController {
   private final BotToken token;
   private final MailService service;
 
-  @BotRequest(type = MessageType.ANY)
+  @BotRequest(type = MessageType.ANY, value = "{@alerter.*}")
   public BaseRequest startConversation(final Chat chat, final Message message,
                                        final TelegramBot bot) {
     final String input;
@@ -55,12 +55,16 @@ public class MailBot implements TelegramMvcController {
         return this.prepareAndSend(chat, message, bot);
       } else {
         return new SendMessage(chat.id(),
-            "I can't release it. I need an artifact in PDF format to make a release." + "\n" + " If I'm not responding trigger me please: https://tg-alerter.herokuapp.com/api/v1/trigger \uD83D\uDD14"
+            "I can't release it. I need an artifact in PDF format to make a release." + "\n" +
+                "\n" +
+                " If I'm not responding trigger me please: https://tg-alerter.herokuapp.com/api/v1/trigger \uD83D\uDD14"
         );
       }
     } else {
       return new SendMessage(chat.id(),
-          "I see you're talking about me, but I don't understand it. If you want to say something to me directly, message format should be: @alerter release it to example@gmail.com; subject is X" + "\n" + "If I'm not responding trigger me please: https://tg-alerter.herokuapp.com/api/v1/trigger \uD83D\uDD14");
+          "I see you're talking about me, but I don't understand it. If you want to say something to me directly, message format should be: @alerter release it to example@gmail.com; subject is X" +
+              "\n" + "\n" +
+              "If I'm not responding trigger me please: https://tg-alerter.herokuapp.com/api/v1/trigger \uD83D\uDD14");
     }
   }
 
@@ -77,7 +81,9 @@ public class MailBot implements TelegramMvcController {
     final PreparedMail prepared = this.service.prepare(request);
     this.service.send(prepared);
     return new SendMessage(chat.id(),
-        "Artifact successfully published" + '\n' + "to: " + request.getTo() + "\uD83D\uDC4D" + "\n" + "If I'm not responding trigger me please: https://tg-alerter.herokuapp.com/api/v1/trigger \uD83D\uDD14");
+        "Artifact successfully published" + '\n' + "to: " + request.getTo() + "\uD83D\uDC4D" +
+            "\n" + "\n" +
+            "If I'm not responding trigger me please: https://tg-alerter.herokuapp.com/api/v1/trigger \uD83D\uDD14");
   }
 
   private String takeDocumentUrl(final Message message, final TelegramBot bot) {
