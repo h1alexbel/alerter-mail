@@ -39,7 +39,7 @@ public class MailBot implements TelegramMvcController {
   private final BotToken token;
   private final MailService service;
 
-  @BotRequest(type = MessageType.ANY, value = "@alerter *")
+  @BotRequest(type = MessageType.ANY)
   public BaseRequest startConversation(final Chat chat, final Message message,
                                        final TelegramBot bot) {
     final String input;
@@ -51,7 +51,6 @@ public class MailBot implements TelegramMvcController {
     if (Pattern.matches(
         "@alerter,? release it to .+@.+; subject is [a-zA-Zа-яА-Я.0-9_| ]*",
         input)) {
-      log.info("input is:{}", input);
       if (message.document() != null) {
         return this.prepareAndSend(chat, message, bot);
       } else {
