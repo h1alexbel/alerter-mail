@@ -49,7 +49,7 @@ public class MailBot implements TelegramMvcController {
       input = message.text();
     }
     if (Pattern.matches(
-        "@alerter,? release it to .+@.+; subject is [a-zA-Zа-яА-Я.0-9_| ]*",
+        "/alerter @alerter,? release it to .+@.+; subject is [a-zA-Zа-яА-Я.0-9_| ]*",
         input)) {
       if (message.document() != null) {
         return this.prepareAndSend(chat, message, bot);
