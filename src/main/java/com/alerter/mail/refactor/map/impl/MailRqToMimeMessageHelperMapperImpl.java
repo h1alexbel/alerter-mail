@@ -1,7 +1,7 @@
-package com.alerter.mail.core.map.impl;
+package com.alerter.mail.refactor.map.impl;
 
-import com.alerter.mail.core.MailRq;
-import com.alerter.mail.core.map.MailMapper;
+import com.alerter.mail.refactor.map.MailMapper;
+import com.alerter.mail.sender.MailRq;
 import javax.mail.MessagingException;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;

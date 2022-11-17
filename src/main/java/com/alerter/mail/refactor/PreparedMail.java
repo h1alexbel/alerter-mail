@@ -1,5 +1,6 @@
-package com.alerter.mail.bot;
+package com.alerter.mail.refactor;
 
+import javax.mail.internet.MimeMessage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -9,7 +10,7 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
-public class BotToken {
+public class PreparedMail {
 
-  private String token;
+  private MimeMessage message;
 }

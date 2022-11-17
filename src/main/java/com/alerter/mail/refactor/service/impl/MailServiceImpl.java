@@ -1,9 +1,9 @@
-package com.alerter.mail.service.impl;
+package com.alerter.mail.refactor.service.impl;
 
-import com.alerter.mail.core.MailRq;
-import com.alerter.mail.core.PreparedMail;
-import com.alerter.mail.core.map.MailMapper;
-import com.alerter.mail.service.MailService;
+import com.alerter.mail.refactor.service.MailService;
+import com.alerter.mail.sender.MailRq;
+import com.alerter.mail.refactor.PreparedMail;
+import com.alerter.mail.refactor.map.MailMapper;
 import java.nio.charset.StandardCharsets;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -25,7 +25,6 @@ public class MailServiceImpl implements MailService {
   private final MailMapper<MailRq, MimeMessageHelper> mapper;
   private final JavaMailSender sender;
 
-  @Override
   public final PreparedMail prepare(final MailRq request) {
     log.debug("Received Mail Request:{}", request);
     final MimeMessage message = this.sender.createMimeMessage();
@@ -41,8 +40,7 @@ public class MailServiceImpl implements MailService {
   }
 
   @Override
-  public final void send(final PreparedMail mail) {
-    log.debug("Sending mail:{}", mail);
-    this.sender.send(mail.getMessage());
+  public void send(final MimeMessage message) {
+    this.sender.send(message);
   }
 }
