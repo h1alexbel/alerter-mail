@@ -1,4 +1,4 @@
-package com.alerter.mail.config;
+package com.alerter.mail.sender;
 
 import java.util.Properties;
 import org.springframework.context.annotation.Bean;
