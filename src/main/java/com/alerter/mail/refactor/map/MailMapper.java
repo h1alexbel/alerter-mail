@@ -1,4 +1,4 @@
-package com.alerter.mail.core.map;
+package com.alerter.mail.refactor.map;
 
 import javax.mail.MessagingException;
 

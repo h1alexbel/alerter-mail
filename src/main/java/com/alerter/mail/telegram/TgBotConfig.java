@@ -1,5 +1,6 @@
-package com.alerter.mail.bot;
+package com.alerter.mail.telegram;
 
+import com.alerter.mail.model.Token;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -8,10 +9,10 @@ import org.springframework.context.annotation.Configuration;
  * @since 1.0
  */
 @Configuration
-public class MailBotConfig {
+public class TgBotConfig {
 
   @Bean
-  public BotToken token() {
-    return new BotToken(System.getenv("BOT_TOKEN"));
+  public Token token() {
+    return new TgBotToken(System.getenv("BOT_TOKEN"));
   }
 }
