@@ -18,33 +18,22 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 
-package com.alerter.mail.sender;
+package com.alerter.mail.trigger;
 
-import com.alerter.mail.model.Mail;
-import javax.mail.internet.MimeMessage;
-import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Aliaksei Bialiauski (abialiauski@solvd.com)
  * @since 0.0.1
  */
-public final class SendMail implements Mail {
+@RestController
+@RequestMapping("/api/v1/trigger")
+public class TrController {
 
-  private final MimeMessage message;
-  private final JavaMailSender sender;
-
-  public SendMail(final MimeMessage message, final JavaMailSender sender) {
-    this.message = message;
-    this.sender = sender;
-  }
-
-  public SendMail send() {
-    this.sender.send(this.message);
-    return this;
-  }
-
-  @Override
-  public MimeMessage mime() {
-    return this.message;
+  @GetMapping
+  public final TrResponse triggerBot() {
+    return new TrResponse("Triggered. You can get back to the Telegram!");
   }
 }

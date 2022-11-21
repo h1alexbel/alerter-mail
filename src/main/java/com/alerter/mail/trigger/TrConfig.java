@@ -18,33 +18,21 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 
-package com.alerter.mail.sender;
+package com.alerter.mail.trigger;
 
-import com.alerter.mail.model.Mail;
-import javax.mail.internet.MimeMessage;
-import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * @author Aliaksei Bialiauski (abialiauski@solvd.com)
  * @since 0.0.1
  */
-public final class SendMail implements Mail {
+@Configuration
+public class TrConfig {
 
-  private final MimeMessage message;
-  private final JavaMailSender sender;
-
-  public SendMail(final MimeMessage message, final JavaMailSender sender) {
-    this.message = message;
-    this.sender = sender;
-  }
-
-  public SendMail send() {
-    this.sender.send(this.message);
-    return this;
-  }
-
-  @Override
-  public MimeMessage mime() {
-    return this.message;
+  @Bean
+  public RestTemplate rest() {
+    return new RestTemplate();
   }
 }
