@@ -102,7 +102,7 @@ SOFTWARE.
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>appassembler-maven-plugin</artifactId>
-                <version>1.1.1</version>
+                <version>1.10</version>
                 <configuration>
                     <assembleDirectory>target</assembleDirectory>
                     <programs>
