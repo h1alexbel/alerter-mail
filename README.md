@@ -1,8 +1,11 @@
 <img src="alerter-logo.svg" alt="drawing" style="width:150px;"/>
 
+[![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
+[![We recommend IntelliJ IDEA](https://www.elegantobjects.org/intellij-idea.svg)](https://www.jetbrains.com/idea/)
+
 [![mvn](https://github.com/h1alexbel/alerter-mail/actions/workflows/maven.yml/badge.svg)](https://github.com/h1alexbel/alerter-mail/actions/workflows/maven.yml)
-![Lines of code](https://img.shields.io/tokei/lines/github/h1alexbel/alerter-mail)
 [![Hits-of-Code](https://hitsofcode.com/github/h1alexbel/alerter-mail)](https://hitsofcode.com/view/github/h1alexbel/alerter-mail)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/h1alexbel/alerter-mail/blob/master/LICENSE)
 
 [Alerter](https://t.me/AlerterMailBot) is an Email assistant/[Telegram](https://telegram.org) chatbot. It helps you to deliver PDF documents faster. 
 
