@@ -20,41 +20,25 @@ SOFTWARE.
 
 package com.alerter.mail.sender;
 
-import com.alerter.mail.model.Mail;
-import java.nio.charset.StandardCharsets;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-import org.springframework.mail.javamail.MimeMessageHelper;
-
 /**
  * @author Aliaksei Bialiauski (abialiauski@solvd.com)
  * @since 0.0.1
  */
-public final class PrMail implements Mail {
+public class MailProcessingException extends RuntimeException {
 
-  private final MimeMessage start;
-  private final MappedMailRq request;
-
-  public PrMail(final MappedMailRq rq, final MimeMessage start) {
-    this.request = rq;
-    this.start = start;
+  public MailProcessingException() {
+    super();
   }
 
-  @Override
-  public MimeMessage mime() {
-    try {
-      final MimeMessageHelper helper =
-          new MimeMessageHelper(
-              this.start, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
-              StandardCharsets.UTF_8.name()
-          );
-      helper.setTo(this.request.to());
-      helper.setFrom(this.request.from());
-      helper.setSubject(this.request.subject());
-      helper.setText(this.request.content());
-      return this.start;
-    } catch (final MessagingException e) {
-      throw new IllegalStateException(e);
-    }
+  public MailProcessingException(String message) {
+    super(message);
+  }
+
+  public MailProcessingException(String message, Throwable cause) {
+    super(message, cause);
+  }
+
+  public MailProcessingException(Throwable cause) {
+    super(cause);
   }
 }

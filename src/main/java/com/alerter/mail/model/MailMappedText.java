@@ -18,43 +18,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 
-package com.alerter.mail.sender;
-
-import com.alerter.mail.model.Mail;
-import java.nio.charset.StandardCharsets;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-import org.springframework.mail.javamail.MimeMessageHelper;
+package com.alerter.mail.model;
 
 /**
  * @author Aliaksei Bialiauski (abialiauski@solvd.com)
  * @since 0.0.1
  */
-public final class PrMail implements Mail {
+public interface MailMappedText {
 
-  private final MimeMessage start;
-  private final MappedMailRq request;
+  String to();
 
-  public PrMail(final MappedMailRq rq, final MimeMessage start) {
-    this.request = rq;
-    this.start = start;
-  }
+  String from();
 
-  @Override
-  public MimeMessage mime() {
-    try {
-      final MimeMessageHelper helper =
-          new MimeMessageHelper(
-              this.start, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
-              StandardCharsets.UTF_8.name()
-          );
-      helper.setTo(this.request.to());
-      helper.setFrom(this.request.from());
-      helper.setSubject(this.request.subject());
-      helper.setText(this.request.content());
-      return this.start;
-    } catch (final MessagingException e) {
-      throw new IllegalStateException(e);
-    }
-  }
+  String subject();
+
+  String content();
 }

@@ -24,6 +24,7 @@ package com.alerter.mail.telegram;
 import com.alerter.mail.model.TgBot;
 import com.alerter.mail.model.Token;
 import com.alerter.mail.sender.MailRq;
+import com.alerter.mail.sender.MappedMailRq;
 import com.alerter.mail.sender.PrMail;
 import com.alerter.mail.sender.SendMail;
 import com.github.kshashov.telegram.api.MessageType;
@@ -102,12 +103,14 @@ public class TgMailBot implements TelegramMvcController, TgBot<BaseRequest> {
     return new TgPrMessage(
         new SendMail(
             new PrMail(
-                new MailRq(
-                    message.caption(),
-                    new TgDocumentURL(
-                        message.document(),
-                        bot
-                    ).read()
+                new MappedMailRq(
+                    new MailRq(
+                        message.caption(),
+                        new TgDocumentURL(
+                            message.document(),
+                            bot
+                        ).read()
+                    )
                 ), this.sender.createMimeMessage()
             ).mime(), this.sender
         ).send(), chat

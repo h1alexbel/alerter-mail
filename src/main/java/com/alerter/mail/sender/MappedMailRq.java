@@ -20,41 +20,49 @@ SOFTWARE.
 
 package com.alerter.mail.sender;
 
-import com.alerter.mail.model.Mail;
-import java.nio.charset.StandardCharsets;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-import org.springframework.mail.javamail.MimeMessageHelper;
+import com.alerter.mail.model.MailMappedText;
 
 /**
  * @author Aliaksei Bialiauski (abialiauski@solvd.com)
  * @since 0.0.1
  */
-public final class PrMail implements Mail {
+public class MappedMailRq implements MailMappedText {
 
-  private final MimeMessage start;
-  private final MappedMailRq request;
+  private static final int AFTER_TO = 3;
+  private static final int AFTER_SUBJECT = 11;
+  private final MailRq request;
 
-  public PrMail(final MappedMailRq rq, final MimeMessage start) {
-    this.request = rq;
-    this.start = start;
+  public MappedMailRq(final MailRq req) {
+    this.request = req;
   }
 
   @Override
-  public MimeMessage mime() {
+  public String to() {
     try {
-      final MimeMessageHelper helper =
-          new MimeMessageHelper(
-              this.start, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
-              StandardCharsets.UTF_8.name()
-          );
-      helper.setTo(this.request.to());
-      helper.setFrom(this.request.from());
-      helper.setSubject(this.request.subject());
-      helper.setText(this.request.content());
-      return this.start;
-    } catch (final MessagingException e) {
-      throw new IllegalStateException(e);
+      final String text = this.request.text();
+      return text.substring(text.indexOf("to"), text.indexOf(";")).substring(AFTER_TO);
+    } catch (final StringIndexOutOfBoundsException e) {
+      throw new MailProcessingException("can't parse request, due to: ", e);
     }
+  }
+
+  @Override
+  public String from() {
+    return System.getenv("BOT_MAIL_NAME");
+  }
+
+  @Override
+  public String subject() {
+    try {
+      final String text = this.request.text();
+      return text.substring(text.indexOf("subject is")).substring(AFTER_SUBJECT);
+    } catch (final StringIndexOutOfBoundsException e) {
+      throw new MailProcessingException("can't parse request, due to: ", e);
+    }
+  }
+
+  @Override
+  public String content() {
+    return this.request.getDocUrl();
   }
 }

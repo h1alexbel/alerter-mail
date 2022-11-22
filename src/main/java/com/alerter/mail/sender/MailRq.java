@@ -20,32 +20,26 @@ SOFTWARE.
 
 package com.alerter.mail.sender;
 
+import com.alerter.mail.model.TgText;
 import lombok.Getter;
 
 /**
  * @author Aliaksei Bialiauski (abialiauski@solvd.com)
  * @since 0.0.1
  */
-@Getter
-public final class MailRq {
+public final class MailRq implements TgText {
 
-  private static final int AFTER_SUBJECT = 11;
-  private static final int AFTER_TO = 3;
-  private final String from;
-  private final String to;
-  private final String subject;
-  private final String docLink;
+  private final String text;
+  @Getter
+  private final String docUrl;
 
   public MailRq(final String text, final String docUrl) {
-    try {
-      this.to = text.substring(text.indexOf("to"), text.indexOf(";"))
-          .substring(AFTER_TO);
-      this.subject = text.substring(text.indexOf("subject is"))
-          .substring(AFTER_SUBJECT);
-      this.docLink = docUrl;
-      this.from = System.getenv("BOT_MAIL_NAME");
-    } catch (final StringIndexOutOfBoundsException e) {
-      throw new MailRqException("can't form request from text due to: ", e);
-    }
+    this.text = text;
+    this.docUrl = docUrl;
+  }
+
+  @Override
+  public String text() {
+    return this.text;
   }
 }
