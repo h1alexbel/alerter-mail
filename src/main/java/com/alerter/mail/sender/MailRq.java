@@ -36,6 +36,7 @@ public final class MailRq {
   private final String subject;
   private final String docLink;
 
+//  @todo #1 make code free constructors
   public MailRq(final String text, final String docUrl) {
     try {
       this.to = text.substring(text.indexOf("to"), text.indexOf(";"))
