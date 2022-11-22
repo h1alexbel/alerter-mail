@@ -18,29 +18,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 
-package com.alerter.mail.sender;
-
-import com.alerter.mail.model.TgText;
-import lombok.Getter;
+package com.alerter.mail.model;
 
 /**
  * @author Aliaksei Bialiauski (abialiauski@solvd.com)
  * @since 0.0.1
  */
-public final class MailRq implements TgText {
+public interface MailMappedText {
 
-  private final String text;
-  @Getter
-  private final String docUrl;
+  String to();
 
-//  @todo #1 make code free constructors
-  public MailRq(final String text, final String docUrl) {
-    this.text = text;
-    this.docUrl = docUrl;
-  }
+  String from();
 
-  @Override
-  public String text() {
-    return this.text;
-  }
+  String subject();
+
+  String content();
 }

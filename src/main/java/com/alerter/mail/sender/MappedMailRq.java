@@ -20,27 +20,49 @@ SOFTWARE.
 
 package com.alerter.mail.sender;
 
-import com.alerter.mail.model.TgText;
-import lombok.Getter;
+import com.alerter.mail.model.MailMappedText;
 
 /**
  * @author Aliaksei Bialiauski (abialiauski@solvd.com)
  * @since 0.0.1
  */
-public final class MailRq implements TgText {
+public class MappedMailRq implements MailMappedText {
 
-  private final String text;
-  @Getter
-  private final String docUrl;
+  private static final int AFTER_TO = 3;
+  private static final int AFTER_SUBJECT = 11;
+  private final MailRq request;
 
-//  @todo #1 make code free constructors
-  public MailRq(final String text, final String docUrl) {
-    this.text = text;
-    this.docUrl = docUrl;
+  public MappedMailRq(final MailRq req) {
+    this.request = req;
   }
 
   @Override
-  public String text() {
-    return this.text;
+  public String to() {
+    try {
+      final String text = this.request.text();
+      return text.substring(text.indexOf("to"), text.indexOf(";")).substring(AFTER_TO);
+    } catch (final StringIndexOutOfBoundsException e) {
+      throw new MailProcessingException("can't parse request, due to: ", e);
+    }
+  }
+
+  @Override
+  public String from() {
+    return System.getenv("BOT_MAIL_NAME");
+  }
+
+  @Override
+  public String subject() {
+    try {
+      final String text = this.request.text();
+      return text.substring(text.indexOf("subject is")).substring(AFTER_SUBJECT);
+    } catch (final StringIndexOutOfBoundsException e) {
+      throw new MailProcessingException("can't parse request, due to: ", e);
+    }
+  }
+
+  @Override
+  public String content() {
+    return this.request.getDocUrl();
   }
 }

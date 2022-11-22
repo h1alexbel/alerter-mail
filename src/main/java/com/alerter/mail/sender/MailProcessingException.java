@@ -20,27 +20,25 @@ SOFTWARE.
 
 package com.alerter.mail.sender;
 
-import com.alerter.mail.model.TgText;
-import lombok.Getter;
-
 /**
  * @author Aliaksei Bialiauski (abialiauski@solvd.com)
  * @since 0.0.1
  */
-public final class MailRq implements TgText {
+public class MailProcessingException extends RuntimeException {
 
-  private final String text;
-  @Getter
-  private final String docUrl;
-
-//  @todo #1 make code free constructors
-  public MailRq(final String text, final String docUrl) {
-    this.text = text;
-    this.docUrl = docUrl;
+  public MailProcessingException() {
+    super();
   }
 
-  @Override
-  public String text() {
-    return this.text;
+  public MailProcessingException(String message) {
+    super(message);
+  }
+
+  public MailProcessingException(String message, Throwable cause) {
+    super(message, cause);
+  }
+
+  public MailProcessingException(Throwable cause) {
+    super(cause);
   }
 }

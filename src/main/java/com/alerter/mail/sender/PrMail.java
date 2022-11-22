@@ -33,9 +33,9 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 public final class PrMail implements Mail {
 
   private final MimeMessage start;
-  private final MailRq request;
+  private final MappedMailRq request;
 
-  public PrMail(final MailRq rq, final MimeMessage start) {
+  public PrMail(final MappedMailRq rq, final MimeMessage start) {
     this.request = rq;
     this.start = start;
   }
@@ -48,10 +48,10 @@ public final class PrMail implements Mail {
               this.start, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
               StandardCharsets.UTF_8.name()
           );
-      helper.setTo(this.request.getTo());
-      helper.setFrom(this.request.getFrom());
-      helper.setSubject(this.request.getSubject());
-      helper.setText(this.request.getDocLink());
+      helper.setTo(this.request.to());
+      helper.setFrom(this.request.from());
+      helper.setSubject(this.request.subject());
+      helper.setText(this.request.content());
       return this.start;
     } catch (final MessagingException e) {
       throw new IllegalStateException(e);
