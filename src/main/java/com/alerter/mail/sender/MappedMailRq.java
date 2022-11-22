@@ -26,7 +26,7 @@ import com.alerter.mail.model.MailMappedText;
  * @author Aliaksei Bialiauski (abialiauski@solvd.com)
  * @since 0.0.1
  */
-public class MappedMailRq implements MailMappedText {
+public final class MappedMailRq implements MailMappedText {
 
   private static final int AFTER_TO = 3;
   private static final int AFTER_SUBJECT = 11;
