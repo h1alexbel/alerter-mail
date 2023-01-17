@@ -5,6 +5,7 @@
 [![We recommend IntelliJ IDEA](https://www.elegantobjects.org/intellij-idea.svg)](https://www.jetbrains.com/idea/)
 
 [![mvn](https://github.com/h1alexbel/alerter-mail/actions/workflows/maven.yml/badge.svg)](https://github.com/h1alexbel/alerter-mail/actions/workflows/maven.yml)
+[![codecov](https://codecov.io/github/h1alexbel/alerter-mail/branch/master/graph/badge.svg?token=APT6E8L0RS)](https://codecov.io/github/h1alexbel/alerter-mail)
 [![Hits-of-Code](https://hitsofcode.com/github/h1alexbel/alerter-mail)](https://hitsofcode.com/view/github/h1alexbel/alerter-mail)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/h1alexbel/alerter-mail/blob/master/LICENSE)
 
