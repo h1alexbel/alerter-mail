@@ -3,8 +3,3 @@ architect:
 merge:
   script:
     - "mvn clean install"
-release:
-  pre: false
-  script: |-
-    [[ "${tag}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || exit -1
-    git commit -am "${tag}"
