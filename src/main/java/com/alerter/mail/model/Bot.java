@@ -18,11 +18,61 @@
  * SOFTWARE.
  */
 
+package com.alerter.mail.model;
+
+import com.pengrad.telegrambot.TelegramBot;
+import com.pengrad.telegrambot.model.Chat;
+import com.pengrad.telegrambot.model.Message;
+
 /**
- * Model.
+ * Bot.
  *
+ * @param <T> Bot response type.
  * @author Aliaksei Bialiauski (abialiauski@solvd.com)
  * @since 0.0.1
  */
+public interface Bot<T> {
 
-package com.alerter.mail.model;
+  /**
+   * Token.
+   *
+   * @return Bot token
+   */
+  Token token();
+
+  /**
+   * Start of the conversation
+   *
+   * @param chat    Telegram Chat
+   * @param message Message to respond
+   * @param bot     Listener, Message Executor
+   * @return Message to the user
+   */
+  T onStart(Chat chat, Message message, TelegramBot bot);
+
+  /**
+   * Explains message format to the user
+   *
+   * @param id chat id
+   * @return Message to the user
+   */
+  T onMissUnderstand(Object id);
+
+  /**
+   * Fails the conversation notifying the user
+   *
+   * @param id chat id
+   * @return Message to the user
+   */
+  T onFail(Object id);
+
+  /**
+   * Processes the user request
+   *
+   * @param chat    Telegram Chat
+   * @param message Message to respond
+   * @param bot     Listener, Message Executor
+   * @return Message to the user
+   */
+  T onProcess(Chat chat, Message message, TelegramBot bot);
+}
