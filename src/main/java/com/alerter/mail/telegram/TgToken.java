@@ -20,41 +20,22 @@
 
 package com.alerter.mail.telegram;
 
-import com.alerter.mail.model.Message;
-import com.pengrad.telegrambot.TelegramBot;
-import com.pengrad.telegrambot.model.Document;
-import com.pengrad.telegrambot.request.GetFile;
+import com.alerter.mail.model.Token;
+import lombok.AllArgsConstructor;
 
 /**
- * Telegram document url.
+ * Telegram bot token.
  *
  * @author Aliaksei Bialiauski (abialiauski@solvd.com)
  * @since 0.0.1
  */
-public final class TgDocumentURL implements Message<String> {
+@AllArgsConstructor
+public class TgToken implements Token {
 
-  private final Document document;
-  private final TelegramBot bot;
-
-  /**
-   * Ctor.
-   *
-   * @param doc document Document
-   * @param bt  bot
-   */
-  public TgDocumentURL(final Document doc, final TelegramBot bt) {
-    this.document = doc;
-    this.bot = bt;
-  }
+  private String token;
 
   @Override
-  public String content() {
-    return this.bot.getFullFilePath(
-      this.bot.execute(
-        new GetFile(
-          this.document.fileId()
-        )
-      ).file()
-    );
+  public String reveal() {
+    return this.token;
   }
 }

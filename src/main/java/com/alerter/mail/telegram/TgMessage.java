@@ -21,40 +21,28 @@
 package com.alerter.mail.telegram;
 
 import com.alerter.mail.model.Message;
-import com.pengrad.telegrambot.TelegramBot;
-import com.pengrad.telegrambot.model.Document;
-import com.pengrad.telegrambot.request.GetFile;
 
 /**
- * Telegram document url.
+ * Telegram text message.
  *
  * @author Aliaksei Bialiauski (abialiauski@solvd.com)
  * @since 0.0.1
  */
-public final class TgDocumentURL implements Message<String> {
+public final class TgMessage implements Message<String> {
 
-  private final Document document;
-  private final TelegramBot bot;
+  private final String text;
 
   /**
    * Ctor.
    *
-   * @param doc document Document
-   * @param bt  bot
+   * @param txt String mail body as plain text
    */
-  public TgDocumentURL(final Document doc, final TelegramBot bt) {
-    this.document = doc;
-    this.bot = bt;
+  public TgMessage(final String txt) {
+    this.text = txt;
   }
 
   @Override
   public String content() {
-    return this.bot.getFullFilePath(
-      this.bot.execute(
-        new GetFile(
-          this.document.fileId()
-        )
-      ).file()
-    );
+    return this.text;
   }
 }

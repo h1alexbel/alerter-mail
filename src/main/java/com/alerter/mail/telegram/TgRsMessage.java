@@ -21,40 +21,48 @@
 package com.alerter.mail.telegram;
 
 import com.alerter.mail.model.Message;
-import com.pengrad.telegrambot.TelegramBot;
-import com.pengrad.telegrambot.model.Document;
-import com.pengrad.telegrambot.request.GetFile;
+import com.pengrad.telegrambot.model.Chat;
+import com.pengrad.telegrambot.request.BaseRequest;
+import com.pengrad.telegrambot.request.SendMessage;
+import java.util.Arrays;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 /**
- * Telegram document url.
+ * Telegram response message.
  *
  * @author Aliaksei Bialiauski (abialiauski@solvd.com)
  * @since 0.0.1
  */
-public final class TgDocumentURL implements Message<String> {
+public final class TgRsMessage implements Message<BaseRequest> {
 
-  private final Document document;
-  private final TelegramBot bot;
+  private static final String LIKE_CODE = "\uD83D\uDC4D";
+  private final Chat chat;
+  private final MimeMessage mime;
 
   /**
    * Ctor.
    *
-   * @param doc document Document
-   * @param bt  bot
+   * @param msg MimeMessage mime
+   * @param ch  Chat chat
    */
-  public TgDocumentURL(final Document doc, final TelegramBot bt) {
-    this.document = doc;
-    this.bot = bt;
+  public TgRsMessage(final MimeMessage msg, final Chat ch) {
+    this.chat = ch;
+    this.mime = msg;
   }
 
   @Override
-  public String content() {
-    return this.bot.getFullFilePath(
-      this.bot.execute(
-        new GetFile(
-          this.document.fileId()
-        )
-      ).file()
-    );
+  public BaseRequest content() {
+    try {
+      return new SendMessage(this.chat.id(),
+        "Artifact successfully published" + '\n' + "to: " +
+          Arrays.toString(this.mime.getRecipients(
+              javax.mail.Message.RecipientType.TO
+            )
+          ) + LIKE_CODE
+      );
+    } catch (final MessagingException e) {
+      throw new IllegalStateException(e);
+    }
   }
 }
