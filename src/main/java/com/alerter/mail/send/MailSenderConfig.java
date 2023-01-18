@@ -18,24 +18,40 @@
  * SOFTWARE.
  */
 
-package com.alerter.mail.model;
+package com.alerter.mail.send;
 
-import com.alerter.mail.send.MailProcessingException;
-import javax.mail.internet.MimeMessage;
+import java.util.Properties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 /**
- * Mail.
+ * Mail sender configuration.
  *
  * @author Aliaksei Bialiauski (abialiauski@solvd.com)
  * @since 0.0.1
  */
-public interface Mail {
+@Configuration
+public class MailSenderConfig {
 
-  /**
-   * Mime.
-   *
-   * @return Mail in Mime representation
-   * @throws MailProcessingException If fails
-   */
-  MimeMessage mime() throws MailProcessingException;
+  private static final String HOST = "smtp.gmail.com";
+  private static final int PORT = 587;
+  private static final String STARTTL_ENABLE = "mail.smtp.starttls.enable";
+  private static final String SMTP_AUTH = "mail.smtp.auth";
+  private static final String PROTO = "mail.transport.protocol";
+
+  @Bean
+  public JavaMailSender sender() {
+    final JavaMailSenderImpl sender = new JavaMailSenderImpl();
+    sender.setHost(HOST);
+    sender.setPort(PORT);
+    sender.setUsername(System.getenv("BOT_MAIL_NAME"));
+    sender.setPassword(System.getenv("BOT_MAIL_PASSWORD"));
+    final Properties properties = sender.getJavaMailProperties();
+    properties.put(PROTO, "smtp");
+    properties.put(SMTP_AUTH, "true");
+    properties.put(STARTTL_ENABLE, "true");
+    return sender;
+  }
 }

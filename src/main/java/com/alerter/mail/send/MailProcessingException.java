@@ -18,24 +18,31 @@
  * SOFTWARE.
  */
 
-package com.alerter.mail.model;
+package com.alerter.mail.send;
 
-import com.alerter.mail.send.MailProcessingException;
-import javax.mail.internet.MimeMessage;
+import java.io.IOException;
 
 /**
- * Mail.
+ * MailProcessingException.
  *
  * @author Aliaksei Bialiauski (abialiauski@solvd.com)
  * @since 0.0.1
  */
-public interface Mail {
+public class MailProcessingException extends IOException {
 
-  /**
-   * Mime.
-   *
-   * @return Mail in Mime representation
-   * @throws MailProcessingException If fails
-   */
-  MimeMessage mime() throws MailProcessingException;
+  public MailProcessingException() {
+    super();
+  }
+
+  public MailProcessingException(final String message) {
+    super(message);
+  }
+
+  public MailProcessingException(final String message, final Throwable cause) {
+    super(message, cause);
+  }
+
+  public MailProcessingException(final Throwable cause) {
+    super(cause);
+  }
 }

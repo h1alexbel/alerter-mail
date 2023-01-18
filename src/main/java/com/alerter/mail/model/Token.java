@@ -29,7 +29,7 @@ package com.alerter.mail.model;
 public interface Token {
 
   /**
-   * Reveal token.
+   * Reveals token.
    *
    * @return Token value represented as String
    */

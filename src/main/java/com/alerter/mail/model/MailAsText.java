@@ -20,6 +20,8 @@
 
 package com.alerter.mail.model;
 
+import com.alerter.mail.send.MailProcessingException;
+
 /**
  * Mail as text.
  *
@@ -33,7 +35,7 @@ public interface MailAsText {
    *
    * @return to as plain text
    */
-  String to();
+  String to() throws MailProcessingException;
 
   /**
    * From.
@@ -46,8 +48,9 @@ public interface MailAsText {
    * Subject.
    *
    * @return subject as plain text
+   * @throws MailProcessingException If fails
    */
-  String subject();
+  String subject() throws MailProcessingException;
 
   /**
    * Content.
