@@ -18,11 +18,41 @@
  * SOFTWARE.
  */
 
+package com.alerter.mail.model;
+
 /**
- * Model.
+ * Mail as text.
  *
  * @author Aliaksei Bialiauski (abialiauski@solvd.com)
  * @since 0.0.1
  */
+public interface MailAsText {
 
-package com.alerter.mail.model;
+  /**
+   * To.
+   *
+   * @return to as plain text
+   */
+  String to();
+
+  /**
+   * From.
+   *
+   * @return from as plain text
+   */
+  String from();
+
+  /**
+   * Subject.
+   *
+   * @return subject as plain text
+   */
+  String subject();
+
+  /**
+   * Content.
+   *
+   * @return content as plain text
+   */
+  String content();
+}
