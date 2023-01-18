@@ -18,24 +18,11 @@
  * SOFTWARE.
  */
 
-package com.alerter.mail.model;
-
-import com.alerter.mail.send.MailProcessingException;
-import javax.mail.internet.MimeMessage;
-
 /**
- * Mail.
+ * Send.
  *
  * @author Aliaksei Bialiauski (abialiauski@solvd.com)
  * @since 0.0.1
  */
-public interface Mail {
 
-  /**
-   * Mime.
-   *
-   * @return Mail in Mime representation
-   * @throws MailProcessingException If fails
-   */
-  MimeMessage mime() throws MailProcessingException;
-}
+package com.alerter.mail.send;

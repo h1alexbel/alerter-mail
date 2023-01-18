@@ -18,24 +18,53 @@
  * SOFTWARE.
  */
 
-package com.alerter.mail.model;
+package com.alerter.mail.send;
 
-import com.alerter.mail.send.MailProcessingException;
+import com.alerter.mail.model.Mail;
+import com.alerter.mail.model.MailAsText;
+import java.nio.charset.StandardCharsets;
+import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import org.springframework.mail.javamail.MimeMessageHelper;
 
 /**
- * Mail.
+ * Prepared Mail.
  *
  * @author Aliaksei Bialiauski (abialiauski@solvd.com)
  * @since 0.0.1
  */
-public interface Mail {
+public final class PrMail implements Mail {
+
+  private final MimeMessage message;
+  private final MailAsText text;
 
   /**
-   * Mime.
+   * Ctor.
    *
-   * @return Mail in Mime representation
-   * @throws MailProcessingException If fails
+   * @param txt MailAsText original request as plain text
+   * @param msg MimeMessage original mime to wrap request
    */
-  MimeMessage mime() throws MailProcessingException;
+  public PrMail(final MailAsText txt, final MimeMessage msg) {
+    this.message = msg;
+    this.text = txt;
+  }
+
+  @Override
+  public MimeMessage mime() throws MailProcessingException {
+    try {
+      final MimeMessageHelper helper =
+        new MimeMessageHelper(
+          this.message,
+          MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
+          StandardCharsets.UTF_8.name()
+        );
+      helper.setTo(this.text.to());
+      helper.setFrom(this.text.from());
+      helper.setSubject(this.text.subject());
+      helper.setText(this.text.content());
+      return this.message;
+    } catch (final MessagingException e) {
+      throw new IllegalStateException(e);
+    }
+  }
 }

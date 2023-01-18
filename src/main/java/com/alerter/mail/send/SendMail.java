@@ -18,24 +18,41 @@
  * SOFTWARE.
  */
 
-package com.alerter.mail.model;
+package com.alerter.mail.send;
 
-import com.alerter.mail.send.MailProcessingException;
+import com.alerter.mail.model.Mail;
 import javax.mail.internet.MimeMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 
 /**
- * Mail.
+ * SendMail.
  *
  * @author Aliaksei Bialiauski (abialiauski@solvd.com)
  * @since 0.0.1
  */
-public interface Mail {
+public final class SendMail implements Mail {
+
+  private final Mail original;
+  private final JavaMailSender sender;
 
   /**
-   * Mime.
+   * Ctor.
    *
-   * @return Mail in Mime representation
-   * @throws MailProcessingException If fails
+   * @param mail Mail message to send
+   * @param send JavaMailSender mail sender
    */
-  MimeMessage mime() throws MailProcessingException;
+  public SendMail(final Mail mail, final JavaMailSender send) {
+    this.original = mail;
+    this.sender = send;
+  }
+
+  @Override
+  public MimeMessage mime() {
+    try {
+      this.sender.send(this.original.mime());
+      return this.original.mime();
+    } catch (final MailProcessingException ex) {
+      throw new IllegalStateException(ex);
+    }
+  }
 }
