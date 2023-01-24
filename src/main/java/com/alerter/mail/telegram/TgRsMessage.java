@@ -34,6 +34,11 @@ import javax.mail.internet.MimeMessage;
  * @author Aliaksei Bialiauski (abialiauski@solvd.com)
  * @since 0.0.1
  */
+/*
+ * @todo #1 create unit and intergration test.
+ * decompose it to improve maintainability.
+ *
+ * */
 public final class TgRsMessage implements Message<BaseRequest> {
 
   private static final String LIKE_CODE = "\uD83D\uDC4D";
