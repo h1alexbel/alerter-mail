@@ -11,7 +11,7 @@ class TgBotTokenTest {
 
   @Test
   void createToken() {
-    final Token token = new TgBotToken("ad90i23-1tio1jvkn=1241W");
+    final Token token = new TgToken("ad90i23-1tio1jvkn=1241W");
     assertThat(token.reveal()).isEqualTo("ad90i23-1tio1jvkn=1241W");
   }
 }
