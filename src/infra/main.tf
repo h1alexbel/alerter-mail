@@ -7,7 +7,7 @@ terraform {
   required_providers {
     heroku = {
       source  = "heroku/heroku"
-      version = "5.2.2"
+      version = "5.2.4"
     }
   }
 }
