@@ -64,7 +64,7 @@ SOFTWARE.
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <spring.telegram.version>0.27</spring.telegram.version>
+    <spring.telegram.version>0.29</spring.telegram.version>
     <system.lambda.version>1.2.1</system.lambda.version>
     <appassembler-maven-plugin.version>2.1.0</appassembler-maven-plugin.version>
     <qulice-maven-plugin.version>0.22.0</qulice-maven-plugin.version>
